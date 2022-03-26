@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "sACN2Video",
+    "title": "sACN2Video Output",
+    "type": "object",
+    "properties": {
+        "els": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "img",
+                            "video",
+                            "color",
+                            "audio",
+                            ""
+                        ]
+                    },
+                    "src": {
+                        "type": "string"
+                    },
+                    "position": {
+                        "type": "object",
+                        "properties": {
+                            "x": {
+                                "type": "number"
+                            },
+                            "y": {
+                                "type": "number"
+                            },
+                            "h": {
+                                "type": "number"
+                            },
+                            "w": {
+                                "type": "number"
+                            }
+                        }
+                    },
+                    "map": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "id",
+                    "type",
+                    "map"
+                ]
+            }
+        }
+    },
+    "required": [
+        "els"
+    ]
+}
