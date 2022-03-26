@@ -1,5 +1,8 @@
 # sACN2Video
+
 Renders Images, Videos, etc. controlled by sACN data
+
+## Note
 
 The documentation is not ready yet (see #1). If you want to use this software, feel free to ask everything.
 
