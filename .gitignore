@@ -104,5 +104,6 @@ dist
 .tern-port
 
 
-#assets
+#assets & data ignore
 /assets/*/*
+/data/*/*
