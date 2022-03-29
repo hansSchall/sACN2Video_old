@@ -1,0 +1,13 @@
+{
+    "$schema": "./schema.json",
+    "els": [
+        {
+            "id": "testimg",
+            "type": "img",
+            "src": "testimg.jpg",
+            "map": {
+                "opacity": 1
+            }
+        }
+    ]
+}
