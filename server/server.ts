@@ -21,6 +21,10 @@ app.use("/hmi", express.static(join(__dirname, "../../client/hmi"), {
     index: ["index.html", "hmi.html"]
 }))
 
+app.use("/hmi/:id", (req, res) => {
+    res.sendFile(join(__dirname, "../../client/hmi/hmi.html"));
+})
+
 app.use("/out/:id", (req, res) => {
     res.sendFile(join(__dirname, "../../client/output/output.html"));
 })

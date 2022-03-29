@@ -20,6 +20,9 @@ app.use("/config", express_1.default.static((0, path_1.join)(__dirname, "../", c
 app.use("/hmi", express_1.default.static((0, path_1.join)(__dirname, "../../client/hmi"), {
     index: ["index.html", "hmi.html"]
 }));
+app.use("/hmi/:id", (req, res) => {
+    res.sendFile((0, path_1.join)(__dirname, "../../client/hmi/hmi.html"));
+});
 app.use("/out/:id", (req, res) => {
     res.sendFile((0, path_1.join)(__dirname, "../../client/output/output.html"));
 });

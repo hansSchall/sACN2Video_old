@@ -20,8 +20,17 @@
                 appearance: none;
                 padding-left: .6rem;
             }
-            .hmi-ll-item:hover{
+            .hmi-output:hover{
                 background-color: #222;
+            }
+
+            .hmi-output{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: .3rem;
+                border-radius: .3rem;
             }
         </style>
     </head>
@@ -30,14 +39,32 @@
 
         </header>
         <main class="hmi-content">
-            <div class="hmi-link-list">
-                
+            <div class="hmi-outputs">
+                <!-- <div class="hmi-output">
+                    <div class="hmi-o-label">test</div>
+                    <div class="hmi-o-options">
+                        
+                    </div>
+                </div> -->
             </div>
         </main>
     </body>
     <script>
-        const outList = [/* add outputs you want to appear in the list*/];
-        const list = document.querySelector(".hmi-link-list");
+        const outPath = location.pathname.split("/").filter(a => a).slice(1).join("/");
+        const list = document.querySelector(".hmi-outputs");
+        fetch("/config/"+outPath+"/hmi.json").then(_ => _.json()).then(value => {
+            for(let i of value.outputs){
+                list.innerHTML += `
+                <div class="hmi-output">
+                    <div class="hmi-o-label">${i}</div>
+                    <div class="hmi-o-options">
+                        <a href="/reboot/${encodeURIComponent(outPath+"/"+ i)}">reboot</a>
+                        <a href="/out/${outPath+"/"+ i}" target="_blank">open</a>
+                    </div>
+                </div>
+                `
+            }
+        })
         outList.forEach(a => {
             list.innerHTML += `<a class="hmi-ll-item" href="/reboot/${encodeURIComponent(a)}">reboot ${a}</a>`
         })
