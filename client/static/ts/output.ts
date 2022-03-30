@@ -1,4 +1,4 @@
-const debug = true;
+const debug = false;
 const outName = location.pathname.split("/").filter(a => a).slice(1).join("/");
 const encodedOut = encodeURIComponent(outName);
 debug && console.log("output:", outName);
@@ -7,9 +7,7 @@ const timeEnd = debug ? console.timeEnd : () => { };
 let ws: WebSocket;
 window.addEventListener("load", () => {
     $("body").style.backgroundColor = "#FF3a00";
-    debug && console.time("fetch");
     fetch("/config/" + outName + ".json").then(_ => _.json()).then(value => {
-        debug && console.timeEnd("fetch");
         parseConfig(value);
     })
     ws = new WebSocket("ws://" + location.host + "/ws/sACN");
@@ -34,7 +32,7 @@ window.addEventListener("load", () => {
         })
         ws.send(`{"type":"clear"}`);
     })
-    console.log(ws);
+    debug && console.log(ws);
 
 })
 
@@ -112,7 +110,7 @@ class OImg extends ODraw {
             $("#content").appendChild(el);
             el.src = toSrc(this.src);
             el.style.objectFit = options?.pos || "fill";
-            console.log(this.p16);
+            debug && console.log(this.p16);
         })
     }
     private p16 = new Pos16Bit(this.renderPos.bind(this), this.defaultPos);
@@ -130,7 +128,7 @@ class OVideo extends ODraw {
     constructor(id: string, readonly src: string, readonly defaultPos: Position, readonly options?: any) {
         super(id);
         this.volume = options?.volume ?? 1;
-        console.log(this.volume);
+        debug && console.log(this.volume);
         this.el = $el<HTMLVideoElement>("el el-video", "video", "", el => {
             $("#content").appendChild(el);
             el.src = toSrc(this.src);
@@ -279,7 +277,7 @@ class OColor extends ODraw {
 class Pos16Bit {
     constructor(public renderPos: (pos: Position) => void, defaultPos?: Position) {
         if (!defaultPos) defaultPos = { x: 0, y: 0, h: 100, w: 100 };
-        console.log(defaultPos);
+        debug && console.log(defaultPos);
         this.xC = ((defaultPos.x || 0) * 2.55);
         this.xF = ((defaultPos.x || 0) * 2.55);
         this.yC = ((defaultPos.y || 0) * 2.55);
@@ -288,7 +286,6 @@ class Pos16Bit {
         this.hF = ((defaultPos.h || 100) * 2.55);
         this.wC = ((defaultPos.w || 100) * 2.55);
         this.wF = ((defaultPos.w || 100) * 2.55);
-        console.log("pos16 constructor")
         setTimeout(this.render.bind(this));
     }
     public xC = 0;
