@@ -45,7 +45,7 @@ ws.app.ws("/ws/sACN", (ws, req) => {
 });
 if (config_js_1.config.http)
     app.listen(config_js_1.config.http.port, () => {
-        console.log(("[HTTP] listening on port " + config_js_1.config.http.port).green);
+        console.log(("[HTTP] listening on port " + config_js_1.config.http?.port).green);
     });
 else
     console.warn("[WARN] No HTTP config / HTTP disabled\n > add http section in config.ts".yellow);
@@ -53,10 +53,11 @@ if (config_js_1.config.sACN) {
     const sACN = new sacn_1.Receiver({
         universes: config_js_1.config.sACN.universes,
         reuseAddr: true,
-        iface: config_js_1.config.sACN.iface
+        iface: config_js_1.config.sACN.iface || undefined
     });
     sACN.on("error", console.error);
     sACN.on("packet", pkg => {
+        // console.log(pkg);
         const univOffset = (pkg.universe - 1) * 512;
         const values = new Array(512);
         values.fill(0);
