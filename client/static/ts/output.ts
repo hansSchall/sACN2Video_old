@@ -1,4 +1,4 @@
-const debug = false;
+const debug = true;
 const outName = location.pathname.split("/").filter(a => a).slice(1).join("/");
 const encodedOut = encodeURIComponent(outName);
 debug && console.log("output:", outName);
@@ -93,7 +93,7 @@ abstract class OEl {
     public abstract updateParam(param: string, value: number): void;
 }
 abstract class ODraw extends OEl {
-    protected el: HTMLElement;
+    protected abstract el: HTMLElement;
     protected renderPos(pos: Position) {
         // console.trace("renderPos", this);
         const style = this.el.style;
@@ -104,6 +104,7 @@ abstract class ODraw extends OEl {
     }
 }
 class OImg extends ODraw {
+    protected el: HTMLElement;
     constructor(id: string, readonly src: string, readonly defaultPos: Position, options?: any) {
         super(id);
         this.el = $el<HTMLImageElement>("el el-img", "img", "", el => {
@@ -241,6 +242,7 @@ class OAudio extends OEl {
     }
 }
 class OColor extends ODraw {
+    protected el: HTMLElement;
     constructor(id: string, readonly defaultPos: Position) {
         super(id);
         this.el = $el<HTMLElement>("el el-color", "div", "", el => {

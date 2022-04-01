@@ -3,6 +3,7 @@
         "target": "es2021",
         "esModuleInterop": true,
         "outDir": "./static/js",
-        "sourceMap": true
+        "sourceMap": true,
+        "strict": true
     }
 }

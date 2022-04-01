@@ -1,3 +1,4 @@
+"use strict";
 const debug = true;
 const outName = location.pathname.split("/").filter(a => a).slice(1).join("/");
 const encodedOut = encodeURIComponent(outName);
@@ -7,9 +8,7 @@ const timeEnd = debug ? console.timeEnd : () => { };
 let ws;
 window.addEventListener("load", () => {
     $("body").style.backgroundColor = "#FF3a00";
-    debug && console.time("fetch");
     fetch("/config/" + outName + ".json").then(_ => _.json()).then(value => {
-        debug && console.timeEnd("fetch");
         parseConfig(value);
     });
     ws = new WebSocket("ws://" + location.host + "/ws/sACN");
@@ -35,7 +34,7 @@ window.addEventListener("load", () => {
         });
         ws.send(`{"type":"clear"}`);
     });
-    console.log(ws);
+    debug && console.log(ws);
 });
 const addrCbs = new Map();
 let wsLoaded = false;
@@ -107,7 +106,7 @@ class OImg extends ODraw {
             $("#content").appendChild(el);
             el.src = toSrc(this.src);
             el.style.objectFit = options?.pos || "fill";
-            console.log(this.p16);
+            debug && console.log(this.p16);
         });
     }
     updateParam(param, value) {
@@ -131,7 +130,7 @@ class OVideo extends ODraw {
         this.playMode = "paused";
         this.volume = 1;
         this.volume = options?.volume ?? 1;
-        console.log(this.volume);
+        debug && console.log(this.volume);
         this.el = $el("el el-video", "video", "", el => {
             $("#content").appendChild(el);
             el.src = toSrc(this.src);
@@ -300,7 +299,7 @@ class Pos16Bit {
         this.wF = 0;
         if (!defaultPos)
             defaultPos = { x: 0, y: 0, h: 100, w: 100 };
-        console.log(defaultPos);
+        debug && console.log(defaultPos);
         this.xC = ((defaultPos.x || 0) * 2.55);
         this.xF = ((defaultPos.x || 0) * 2.55);
         this.yC = ((defaultPos.y || 0) * 2.55);
@@ -309,7 +308,6 @@ class Pos16Bit {
         this.hF = ((defaultPos.h || 100) * 2.55);
         this.wC = ((defaultPos.w || 100) * 2.55);
         this.wF = ((defaultPos.w || 100) * 2.55);
-        console.log("pos16 constructor");
         setTimeout(this.render.bind(this));
     }
     render() {
