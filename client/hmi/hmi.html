@@ -5,13 +5,13 @@
         <title>sACN2Video HMI Panel</title>
         <style>
             :root{
-                background-color: black;
-                color: #fa0;
+                background-color: #222;
+                color: #ddd;
                 font-family: sans-serif;
             }
             .hmi-ll-item{
                 display: block;
-                background-color: #111;
+                background-color: #222;
                 border-radius: .3rem;
                 padding: .3rem;
                 margin: .3rem;
@@ -21,7 +21,7 @@
                 padding-left: .6rem;
             }
             .hmi-output:hover{
-                background-color: #222;
+                background-color: #333;
             }
 
             .hmi-output{
@@ -64,9 +64,6 @@
                 </div>
                 `
             }
-        })
-        outList.forEach(a => {
-            list.innerHTML += `<a class="hmi-ll-item" href="/reboot/${encodeURIComponent(a)}">reboot ${a}</a>`
         })
     </script>
 </html>
