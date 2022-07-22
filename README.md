@@ -2,9 +2,8 @@
 
 Renders Images, Videos, etc. controlled by sACN data
 
-## Note
-
-The documentation is not ready yet (see #1). If you want to use this software, feel free to ask everything.
+## IMPORTANT NOTE
+DEPREACED: This is old, use [sACN2Video**2**](http://github.com/hansSchall/sACN2Video2) instead!!
 
 ## How does this work
 
