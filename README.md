@@ -1,9 +1,8 @@
+# This is old, use the [new version sACN2Video\*2\* instead](http://github.com/hansSchall/sACN2Video2)
+
 # sACN2Video
 
 Renders Images, Videos, etc. controlled by sACN data
-
-## IMPORTANT NOTE
-DEPREACED: This is old, use [sACN2Video**2**](http://github.com/hansSchall/sACN2Video2) instead!!
 
 ## How does this work
 
